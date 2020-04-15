@@ -5,7 +5,7 @@ require 'rake_easy_rsa/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'rake_easy_rsa'
-  spec.version = RakeEasyRsa::VERSION
+  spec.version = RakeEasyRSA::VERSION
   spec.authors = ['Toby Clemson']
   spec.email = ['tobyclemson@gmail.com']
 
