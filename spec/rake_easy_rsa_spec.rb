@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-RSpec.describe RakeEasyRsa do
+RSpec.describe RakeEasyRSA do
   it 'has a version number' do
-    expect(RakeEasyRsa::VERSION).not_to be nil
+    expect(RakeEasyRSA::VERSION).not_to be nil
   end
 end
