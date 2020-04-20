@@ -93,7 +93,7 @@ RSpec.describe RakeEasyRSA do
         expect(task_set.uri_template)
             .to(eq('https://github.com/OpenVPN/easy-rsa/releases/' +
                 'download/v<%= @version %>/' +
-                'EasyRSA-nix-<%= @version %>.tgz'))
+                'EasyRSA-<%= @version %>.tgz'))
       end
 
       it 'uses the correct file name template' do

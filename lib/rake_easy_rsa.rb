@@ -10,7 +10,7 @@ module RakeEasyRSA
     binary_directory = ''
     uri_template = 'https://github.com/OpenVPN/easy-rsa/releases/' +
         'download/v<%= @version %>/' +
-        'EasyRSA-nix-<%= @version %>.tgz'
+        'EasyRSA-<%= @version %>.tgz'
     file_name_template = 'EasyRSA-<%= @version %>.tgz'
     strip_path_template = 'EasyRSA-<%= @version %>'
 
