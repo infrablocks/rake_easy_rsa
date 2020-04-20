@@ -25,11 +25,12 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rake_dependencies', '~> 2', '< 3'
   spec.add_dependency 'rake_factory', '>= 0.23', '< 1'
+  spec.add_dependency 'ruby_easy_rsa', '0.2.0.pre.9'
   spec.add_dependency 'semantic', '~> 1.6.1'
 
   spec.add_development_dependency 'bundler', '~> 2.1'
   spec.add_development_dependency 'rake', '~> 13.0'
-  spec.add_development_dependency 'rake_circle_ci', '~> 0.3'
+  spec.add_development_dependency 'rake_circle_ci', '~> 0.7'
   spec.add_development_dependency 'rake_github', '~> 0.3'
   spec.add_development_dependency 'rake_ssh', '~> 0.2'
   spec.add_development_dependency 'rspec', '~> 3.9'
