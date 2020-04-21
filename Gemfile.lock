@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rake_easy_rsa (0.2.0.pre.3)
+    rake_easy_rsa (0.2.0.pre.4)
       rake_dependencies (~> 2, < 3)
       rake_factory (>= 0.23, < 1)
       ruby_easy_rsa (= 0.2.0.pre.10)
