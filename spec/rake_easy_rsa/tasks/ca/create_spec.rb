@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'ruby_easy_rsa'
 
-describe RakeEasyRSA::Tasks::Initialise do
+describe RakeEasyRSA::Tasks::CA::Create do
   include_context :rake
 
   before(:each) do
@@ -10,31 +10,31 @@ describe RakeEasyRSA::Tasks::Initialise do
   end
 
   def define_task(opts = {}, &block)
-    opts = {namespace: :pki}.merge(opts)
+    opts = {namespace: :ca}.merge(opts)
 
     namespace opts[:namespace] do
       subject.define(opts, &block)
     end
   end
 
-  it 'adds a initialise task in the namespace in which it is created' do
+  it 'adds a create task in the namespace in which it is created' do
     define_task
 
-    expect(Rake::Task.task_defined?('pki:initialise'))
+    expect(Rake::Task.task_defined?('ca:create'))
         .to(be(true))
   end
 
-  it 'gives the initialise task a description' do
+  it 'gives the create task a description' do
     define_task
 
-    expect(Rake::Task['pki:initialise'].full_comment)
-        .to(eq('Initialise the PKI working directory'))
+    expect(Rake::Task['ca:create'].full_comment)
+        .to(eq('Create the CA certificate for the PKI'))
   end
 
   it 'uses the underlying default PKI directory by default' do
     define_task
 
-    rake_task = Rake::Task['pki:initialise']
+    rake_task = Rake::Task['ca:create']
     test_task = rake_task.creator
 
     expect(test_task.directory).to(be_nil)
@@ -46,24 +46,24 @@ describe RakeEasyRSA::Tasks::Initialise do
     define_task(
         directory: directory)
 
-    rake_task = Rake::Task['pki:initialise']
+    rake_task = Rake::Task['ca:create']
     test_task = rake_task.creator
 
     expect(test_task.directory).to(eq(directory))
   end
 
-  it 'initialises PKI' do
+  it 'builds a CA' do
     directory = 'config/secrets/pki'
 
     expect(RubyEasyRSA)
-        .to(receive(:init_pki)
+        .to(receive(:build_ca)
             .with(hash_including(
                 directory: directory)))
 
     define_task(
         directory: directory)
 
-    Rake::Task['pki:initialise'].invoke
+    Rake::Task['ca:create'].invoke
   end
 
   def stub_output
