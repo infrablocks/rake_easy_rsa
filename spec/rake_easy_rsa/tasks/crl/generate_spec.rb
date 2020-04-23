@@ -1,6 +1,8 @@
 require 'spec_helper'
 require 'ruby_easy_rsa'
 
+require_relative '../../../support/shared_examples/global_parameters'
+
 describe RakeEasyRSA::Tasks::CRL::Generate do
   include_context :rake
 
@@ -31,26 +33,7 @@ describe RakeEasyRSA::Tasks::CRL::Generate do
         .to(eq('Generate the certificate revocation list for the PKI'))
   end
 
-  it 'uses the underlying default PKI directory by default' do
-    define_task
-
-    rake_task = Rake::Task['crl:generate']
-    test_task = rake_task.creator
-
-    expect(test_task.directory).to(be_nil)
-  end
-
-  it 'uses the specified PKI directory when provided' do
-    directory = 'config/secrets/pki'
-
-    define_task(
-        directory: directory)
-
-    rake_task = Rake::Task['crl:generate']
-    test_task = rake_task.creator
-
-    expect(test_task.directory).to(eq(directory))
-  end
+  it_behaves_like "a task with global parameters", "crl:generate"
 
   it 'generates a CRL' do
     directory = 'config/secrets/pki'

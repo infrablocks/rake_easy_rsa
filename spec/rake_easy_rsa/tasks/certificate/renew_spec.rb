@@ -1,6 +1,8 @@
 require 'spec_helper'
 require 'ruby_easy_rsa'
 
+require_relative '../../../support/shared_examples/global_parameters'
+
 describe RakeEasyRSA::Tasks::Certificate::Renew do
   include_context :rake
 
@@ -31,26 +33,7 @@ describe RakeEasyRSA::Tasks::Certificate::Renew do
         .to(eq('Renew a certificate of the PKI'))
   end
 
-  it 'uses the underlying default PKI directory by default' do
-    define_task
-
-    rake_task = Rake::Task['certificate:renew']
-    test_task = rake_task.creator
-
-    expect(test_task.directory).to(be_nil)
-  end
-
-  it 'uses the specified PKI directory when provided' do
-    directory = 'config/secrets/pki'
-
-    define_task(
-        directory: directory)
-
-    rake_task = Rake::Task['certificate:renew']
-    test_task = rake_task.creator
-
-    expect(test_task.directory).to(eq(directory))
-  end
+  it_behaves_like "a task with global parameters", "certificate:renew"
 
   it 'renews a certificate' do
     directory = 'config/secrets/pki'
