@@ -1,1 +1,2 @@
 require_relative 'certificate/revoke'
+require_relative 'certificate/renew'
