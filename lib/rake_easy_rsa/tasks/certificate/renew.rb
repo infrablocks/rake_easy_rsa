@@ -1,23 +1,17 @@
 require 'rake_factory'
 require 'ruby_easy_rsa'
 
+require_relative '../mixins/global_parameters'
+
 module RakeEasyRSA
   module Tasks
     module Certificate
       class Renew < RakeFactory::Task
+        include Mixins::GlobalParameters
+
         default_name :renew
         default_argument_names [:filename_base]
         default_description "Renew a certificate of the PKI"
-
-        parameter :directory
-        parameter :extensions_directory
-        parameter :openssl_binary
-        parameter :ssl_configuration
-        parameter :safe_configuration
-        parameter :vars
-        parameter :batch, default: true
-        parameter :input_password
-        parameter :output_password
 
         action do |t, args|
           puts "Renewing certificate '#{args.filename_base}'... "

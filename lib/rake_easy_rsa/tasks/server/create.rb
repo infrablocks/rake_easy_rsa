@@ -1,23 +1,17 @@
 require 'rake_factory'
 require 'ruby_easy_rsa'
 
+require_relative '../mixins/global_parameters'
+
 module RakeEasyRSA
   module Tasks
     module Server
       class Create < RakeFactory::Task
+        include Mixins::GlobalParameters
+
         default_name :create
         default_argument_names [:filename_base]
         default_description "Create a server certificate for the PKI"
-
-        parameter :directory
-        parameter :extensions_directory
-        parameter :openssl_binary
-        parameter :ssl_configuration
-        parameter :safe_configuration
-        parameter :vars
-        parameter :batch, default: true
-        parameter :input_password
-        parameter :output_password
 
         action do |t, args|
           puts "Creating server certificate '#{args.filename_base}'... "
