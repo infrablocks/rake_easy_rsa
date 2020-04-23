@@ -1,6 +1,8 @@
 require 'spec_helper'
 require 'ruby_easy_rsa'
 
+require_relative '../../support/shared_examples/global_parameters'
+
 describe RakeEasyRSA::Tasks::Initialise do
   include_context :rake
 
@@ -31,26 +33,7 @@ describe RakeEasyRSA::Tasks::Initialise do
         .to(eq('Initialise the PKI working directory'))
   end
 
-  it 'uses the underlying default PKI directory by default' do
-    define_task
-
-    rake_task = Rake::Task['pki:initialise']
-    test_task = rake_task.creator
-
-    expect(test_task.directory).to(be_nil)
-  end
-
-  it 'uses the specified PKI directory when provided' do
-    directory = 'config/secrets/pki'
-
-    define_task(
-        directory: directory)
-
-    rake_task = Rake::Task['pki:initialise']
-    test_task = rake_task.creator
-
-    expect(test_task.directory).to(eq(directory))
-  end
+  it_behaves_like "a task with global parameters", "pki:initialise"
 
   it 'initialises PKI' do
     directory = 'config/secrets/pki'
