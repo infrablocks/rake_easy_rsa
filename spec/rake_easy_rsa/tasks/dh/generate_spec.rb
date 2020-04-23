@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'ruby_easy_rsa'
 
 require_relative '../../../support/shared_examples/global_parameters'
+require_relative '../../../support/shared_examples/ssl_parameters'
 
 describe RakeEasyRSA::Tasks::DH::Generate do
   include_context :rake
@@ -34,6 +35,7 @@ describe RakeEasyRSA::Tasks::DH::Generate do
   end
 
   it_behaves_like "a task with global parameters", "dh:generate"
+  it_behaves_like "a task with ssl parameters", "dh:generate"
 
   it 'generates Diffie-Hellman parameters' do
     directory = 'config/secrets/pki'

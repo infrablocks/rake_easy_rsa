@@ -2,12 +2,14 @@ require 'rake_factory'
 require 'ruby_easy_rsa'
 
 require_relative '../mixins/global_parameters'
+require_relative '../mixins/ssl_parameters'
 
 module RakeEasyRSA
   module Tasks
     module CRL
       class Generate < RakeFactory::Task
         include Mixins::GlobalParameters
+        include Mixins::SSLParameters
 
         default_name :generate
         default_description(

@@ -2,12 +2,14 @@ require 'rake_factory'
 require 'ruby_easy_rsa'
 
 require_relative '../mixins/global_parameters'
+require_relative '../mixins/ssl_parameters'
 
 module RakeEasyRSA
   module Tasks
     module Client
       class Create < RakeFactory::Task
         include Mixins::GlobalParameters
+        include Mixins::SSLParameters
 
         default_name :create
         default_argument_names [:filename_base]
