@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'ruby_easy_rsa'
 
-describe RakeEasyRSA::Tasks::Server::Revoke do
+describe RakeEasyRSA::Tasks::Certificate::Revoke do
   include_context :rake
 
   before(:each) do
@@ -10,7 +10,7 @@ describe RakeEasyRSA::Tasks::Server::Revoke do
   end
 
   def define_task(opts = {}, &block)
-    opts = {namespace: :server}.merge(opts)
+    opts = {namespace: :certificate}.merge(opts)
 
     namespace opts[:namespace] do
       subject.define(opts, &block)
@@ -20,21 +20,21 @@ describe RakeEasyRSA::Tasks::Server::Revoke do
   it 'adds a revoke task in the namespace in which it is created' do
     define_task
 
-    expect(Rake::Task.task_defined?('server:revoke'))
+    expect(Rake::Task.task_defined?('certificate:revoke'))
         .to(be(true))
   end
 
   it 'gives the revoke task a description' do
     define_task
 
-    expect(Rake::Task['server:revoke'].full_comment)
-        .to(eq('Revoke a server certificate for the PKI'))
+    expect(Rake::Task['certificate:revoke'].full_comment)
+        .to(eq('Revoke a certificate of the PKI'))
   end
 
   it 'uses the underlying default PKI directory by default' do
     define_task
 
-    rake_task = Rake::Task['server:revoke']
+    rake_task = Rake::Task['certificate:revoke']
     test_task = rake_task.creator
 
     expect(test_task.directory).to(be_nil)
@@ -46,13 +46,13 @@ describe RakeEasyRSA::Tasks::Server::Revoke do
     define_task(
         directory: directory)
 
-    rake_task = Rake::Task['server:revoke']
+    rake_task = Rake::Task['certificate:revoke']
     test_task = rake_task.creator
 
     expect(test_task.directory).to(eq(directory))
   end
 
-  it 'revokes a client certificate' do
+  it 'revokes a certificate' do
     directory = 'config/secrets/pki'
     filename_base = 'some_client'
 
@@ -65,7 +65,7 @@ describe RakeEasyRSA::Tasks::Server::Revoke do
     define_task(
         directory: directory)
 
-    Rake::Task['server:revoke'].invoke(filename_base)
+    Rake::Task['certificate:revoke'].invoke(filename_base)
   end
 
   def stub_output
