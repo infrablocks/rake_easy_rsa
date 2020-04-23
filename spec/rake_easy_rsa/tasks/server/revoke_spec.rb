@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'ruby_easy_rsa'
 
-describe RakeEasyRSA::Tasks::Server::Create do
+describe RakeEasyRSA::Tasks::Server::Revoke do
   include_context :rake
 
   before(:each) do
@@ -17,24 +17,24 @@ describe RakeEasyRSA::Tasks::Server::Create do
     end
   end
 
-  it 'adds a create task in the namespace in which it is created' do
+  it 'adds a revoke task in the namespace in which it is created' do
     define_task
 
-    expect(Rake::Task.task_defined?('server:create'))
+    expect(Rake::Task.task_defined?('server:revoke'))
         .to(be(true))
   end
 
-  it 'gives the create task a description' do
+  it 'gives the revoke task a description' do
     define_task
 
-    expect(Rake::Task['server:create'].full_comment)
-        .to(eq('Create a server certificate for the PKI'))
+    expect(Rake::Task['server:revoke'].full_comment)
+        .to(eq('Revoke a server certificate for the PKI'))
   end
 
   it 'uses the underlying default PKI directory by default' do
     define_task
 
-    rake_task = Rake::Task['server:create']
+    rake_task = Rake::Task['server:revoke']
     test_task = rake_task.creator
 
     expect(test_task.directory).to(be_nil)
@@ -46,18 +46,18 @@ describe RakeEasyRSA::Tasks::Server::Create do
     define_task(
         directory: directory)
 
-    rake_task = Rake::Task['server:create']
+    rake_task = Rake::Task['server:revoke']
     test_task = rake_task.creator
 
     expect(test_task.directory).to(eq(directory))
   end
 
-  it 'creates a client certificate' do
+  it 'revokes a client certificate' do
     directory = 'config/secrets/pki'
-    filename_base = 'some_server'
+    filename_base = 'some_client'
 
     expect(RubyEasyRSA)
-        .to(receive(:build_server_full)
+        .to(receive(:revoke)
             .with(hash_including(
                 filename_base: filename_base,
                 directory: directory)))
@@ -65,7 +65,7 @@ describe RakeEasyRSA::Tasks::Server::Create do
     define_task(
         directory: directory)
 
-    Rake::Task['server:create'].invoke(filename_base)
+    Rake::Task['server:revoke'].invoke(filename_base)
   end
 
   def stub_output

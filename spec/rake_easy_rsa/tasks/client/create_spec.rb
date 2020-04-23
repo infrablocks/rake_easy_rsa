@@ -54,18 +54,18 @@ describe RakeEasyRSA::Tasks::Client::Create do
 
   it 'creates a client certificate' do
     directory = 'config/secrets/pki'
-    common_name = 'some.client@example.com'
+    filename_base = 'some_client'
 
     expect(RubyEasyRSA)
         .to(receive(:build_client_full)
             .with(hash_including(
-                common_name: common_name,
+                filename_base: filename_base,
                 directory: directory)))
 
     define_task(
         directory: directory)
 
-    Rake::Task['client:create'].invoke(common_name)
+    Rake::Task['client:create'].invoke(filename_base)
   end
 
   def stub_output
