@@ -3,6 +3,7 @@ require 'ruby_easy_rsa'
 
 require_relative '../../../support/shared_examples/global_parameters'
 require_relative '../../../support/shared_examples/ssl_parameters'
+require_relative '../../../support/shared_examples/encrypt_key_parameters'
 
 describe RakeEasyRSA::Tasks::Certificate::Renew do
   include_context :rake
@@ -36,6 +37,7 @@ describe RakeEasyRSA::Tasks::Certificate::Renew do
 
   it_behaves_like "a task with global parameters", "certificate:renew"
   it_behaves_like "a task with ssl parameters", "certificate:renew"
+  it_behaves_like "a task with encrypt key parameters", "certificate:renew"
 
   it 'renews a certificate' do
     directory = 'config/secrets/pki'

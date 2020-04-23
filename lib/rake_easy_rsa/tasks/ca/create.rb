@@ -4,6 +4,7 @@ require 'ruby_easy_rsa'
 require_relative '../mixins/global_parameters'
 require_relative '../mixins/ssl_parameters'
 require_relative '../mixins/algorithm_parameters'
+require_relative '../mixins/encrypt_key_parameters'
 
 module RakeEasyRSA
   module Tasks
@@ -12,6 +13,7 @@ module RakeEasyRSA
         include Mixins::GlobalParameters
         include Mixins::SSLParameters
         include Mixins::AlgorithmParameters
+        include Mixins::EncryptKeyParameters
 
         default_name :create
         default_description "Create the CA certificate for the PKI"

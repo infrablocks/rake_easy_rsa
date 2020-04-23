@@ -3,6 +3,7 @@ require 'ruby_easy_rsa'
 
 require_relative '../mixins/global_parameters'
 require_relative '../mixins/ssl_parameters'
+require_relative '../mixins/encrypt_key_parameters'
 
 module RakeEasyRSA
   module Tasks
@@ -10,6 +11,7 @@ module RakeEasyRSA
       class Renew < RakeFactory::Task
         include Mixins::GlobalParameters
         include Mixins::SSLParameters
+        include Mixins::EncryptKeyParameters
 
         default_name :renew
         default_argument_names [:filename_base]
