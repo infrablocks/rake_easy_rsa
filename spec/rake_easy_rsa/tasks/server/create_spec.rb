@@ -3,6 +3,7 @@ require 'ruby_easy_rsa'
 
 require_relative '../../../support/shared_examples/global_parameters'
 require_relative '../../../support/shared_examples/ssl_parameters'
+require_relative '../../../support/shared_examples/algorithm_parameters'
 
 describe RakeEasyRSA::Tasks::Server::Create do
   include_context :rake
@@ -36,6 +37,7 @@ describe RakeEasyRSA::Tasks::Server::Create do
 
   it_behaves_like "a task with global parameters", "server:create"
   it_behaves_like "a task with ssl parameters", "server:create"
+  it_behaves_like "a task with algorithm parameters", "server:create"
 
   it 'creates a client certificate' do
     directory = 'config/secrets/pki'
