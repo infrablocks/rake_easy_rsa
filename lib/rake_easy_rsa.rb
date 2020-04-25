@@ -2,6 +2,7 @@ require 'rake_dependencies'
 require 'ruby_easy_rsa'
 require 'rake_easy_rsa/version'
 require 'rake_easy_rsa/tasks'
+require 'rake_easy_rsa/task_sets'
 
 module RakeEasyRSA
   def self.define_installation_tasks(opts = {})

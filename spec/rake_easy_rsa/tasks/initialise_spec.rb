@@ -12,7 +12,7 @@ describe RakeEasyRSA::Tasks::Initialise do
     stub_ruby_easy_rsa
   end
 
-  def define_task(opts = {}, &block)
+  def define_tasks(opts = {}, &block)
     opts = {namespace: :pki}.merge(opts)
 
     namespace opts[:namespace] do
@@ -21,14 +21,14 @@ describe RakeEasyRSA::Tasks::Initialise do
   end
 
   it 'adds a initialise task in the namespace in which it is created' do
-    define_task
+    define_tasks
 
     expect(Rake::Task.task_defined?('pki:initialise'))
         .to(be(true))
   end
 
   it 'gives the initialise task a description' do
-    define_task
+    define_tasks
 
     expect(Rake::Task['pki:initialise'].full_comment)
         .to(eq('Initialise the PKI working directory'))
@@ -45,7 +45,7 @@ describe RakeEasyRSA::Tasks::Initialise do
             .with(hash_including(
                 directory: directory)))
 
-    define_task(
+    define_tasks(
         directory: directory)
 
     Rake::Task['pki:initialise'].invoke

@@ -1,9 +1,9 @@
 require 'rake_factory'
 require 'ruby_easy_rsa'
 
-require_relative '../mixins/global_parameters'
-require_relative '../mixins/ssl_parameters'
-require_relative '../mixins/encrypt_key_parameters'
+require_relative '../../mixins/global_parameters'
+require_relative '../../mixins/ssl_parameters'
+require_relative '../../mixins/encrypt_key_parameters'
 
 module RakeEasyRSA
   module Tasks

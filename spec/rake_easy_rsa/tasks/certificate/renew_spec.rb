@@ -13,7 +13,7 @@ describe RakeEasyRSA::Tasks::Certificate::Renew do
     stub_ruby_easy_rsa
   end
 
-  def define_task(opts = {}, &block)
+  def define_tasks(opts = {}, &block)
     opts = {namespace: :certificate}.merge(opts)
 
     namespace opts[:namespace] do
@@ -22,14 +22,14 @@ describe RakeEasyRSA::Tasks::Certificate::Renew do
   end
 
   it 'adds a renew task in the namespace in which it is created' do
-    define_task
+    define_tasks
 
     expect(Rake::Task.task_defined?('certificate:renew'))
         .to(be(true))
   end
 
   it 'gives the renew task a description' do
-    define_task
+    define_tasks
 
     expect(Rake::Task['certificate:renew'].full_comment)
         .to(eq('Renew a certificate of the PKI'))
@@ -49,7 +49,7 @@ describe RakeEasyRSA::Tasks::Certificate::Renew do
                 filename_base: filename_base,
                 directory: directory)))
 
-    define_task(
+    define_tasks(
         directory: directory)
 
     Rake::Task['certificate:renew'].invoke(filename_base)

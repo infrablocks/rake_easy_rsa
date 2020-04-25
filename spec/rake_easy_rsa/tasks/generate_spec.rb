@@ -8,7 +8,7 @@ describe RakeEasyRSA::Tasks::Generate do
     stub_ruby_easy_rsa
   end
 
-  def define_task(opts = {}, &block)
+  def define_tasks(opts = {}, &block)
     ns = opts[:namespace] || :pki
     additional_tasks = opts[:additional_tasks] ||
         [
@@ -41,21 +41,21 @@ describe RakeEasyRSA::Tasks::Generate do
 
   context 'task definition' do
     it 'adds an generate task in the namespace in which it is created' do
-      define_task
+      define_tasks
 
       expect(Rake::Task['pki:generate']).not_to be_nil
     end
 
     it 'gives the generate task a description' do
-      define_task
+      define_tasks
 
       expect(Rake::Task['pki:generate'].full_comment)
           .to(eq('Generate all pre-requisites for managing the PKI'))
     end
 
     it 'allows multiple fetch tasks to be declared' do
-      define_task(namespace: :pki1)
-      define_task(namespace: :pki2)
+      define_tasks(namespace: :pki1)
+      define_tasks(namespace: :pki2)
 
       expect(Rake::Task['pki1:generate']).not_to be_nil
       expect(Rake::Task['pki2:generate']).not_to be_nil
@@ -64,13 +64,13 @@ describe RakeEasyRSA::Tasks::Generate do
 
   context 'parameters' do
     it 'allows the task name to be overridden' do
-      define_task(name: :prepare)
+      define_tasks(name: :prepare)
 
       expect(Rake::Task['pki:prepare']).not_to be_nil
     end
 
     it 'allows the initialise task to be overridden' do
-      define_task(
+      define_tasks(
           additional_tasks: [
               :bootstrap,
               {ca: [:create]},
@@ -91,7 +91,7 @@ describe RakeEasyRSA::Tasks::Generate do
     end
 
     it 'allows the CA create task to be overridden' do
-      define_task(
+      define_tasks(
           additional_tasks: [
               :initialise,
               {ca: [:build]},
@@ -112,7 +112,7 @@ describe RakeEasyRSA::Tasks::Generate do
     end
 
     it 'allows the CRL generate task to be overridden' do
-      define_task(
+      define_tasks(
           additional_tasks: [
               :initialise,
               {ca: [:create]},
@@ -133,7 +133,7 @@ describe RakeEasyRSA::Tasks::Generate do
     end
 
     it 'allows the DH generate task to be overridden' do
-      define_task(
+      define_tasks(
           additional_tasks: [
               :initialise,
               {ca: [:create]},

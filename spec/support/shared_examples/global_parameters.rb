@@ -1,6 +1,6 @@
 shared_examples "a task with global parameters" do |task_name|
   it 'uses the underlying default PKI directory by default' do
-    define_task
+    define_tasks
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -11,7 +11,7 @@ shared_examples "a task with global parameters" do |task_name|
   it 'uses the specified PKI directory when provided' do
     directory = 'config/secrets/pki'
 
-    define_task(
+    define_tasks(
         directory: directory)
 
     rake_task = Rake::Task[task_name]
@@ -21,7 +21,7 @@ shared_examples "a task with global parameters" do |task_name|
   end
 
   it 'uses the underlying default extensions directory by default' do
-    define_task
+    define_tasks
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -32,7 +32,7 @@ shared_examples "a task with global parameters" do |task_name|
   it 'uses the provided extensions directory when specified' do
     extensions_directory = './pki/extensions'
 
-    define_task(
+    define_tasks(
         extensions_directory: extensions_directory)
 
     rake_task = Rake::Task[task_name]
@@ -42,7 +42,7 @@ shared_examples "a task with global parameters" do |task_name|
   end
 
   it 'uses the underlying default openssl binary by default' do
-    define_task
+    define_tasks
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -53,7 +53,7 @@ shared_examples "a task with global parameters" do |task_name|
   it 'uses the provided openssl binary when specified' do
     openssl_binary = "./vendor/openssl/bin/openssl"
 
-    define_task(
+    define_tasks(
         openssl_binary: openssl_binary)
 
     rake_task = Rake::Task[task_name]
@@ -63,7 +63,7 @@ shared_examples "a task with global parameters" do |task_name|
   end
 
   it 'uses the underlying default ssl configuration by default' do
-    define_task
+    define_tasks
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -74,7 +74,7 @@ shared_examples "a task with global parameters" do |task_name|
   it 'uses the provided ssl configuration when specified' do
     ssl_configuration = "./vendor/easyrsa/openssl-easyrsa.cnf"
 
-    define_task(
+    define_tasks(
         ssl_configuration: ssl_configuration)
 
     rake_task = Rake::Task[task_name]
@@ -84,7 +84,7 @@ shared_examples "a task with global parameters" do |task_name|
   end
 
   it 'uses the underlying default safe configuration by default' do
-    define_task
+    define_tasks
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -95,7 +95,7 @@ shared_examples "a task with global parameters" do |task_name|
   it 'uses the provided safe configuration when specified' do
     safe_configuration = "./vendor/easyrsa/safessl-easyrsa.cnf"
 
-    define_task(
+    define_tasks(
         safe_configuration: safe_configuration)
 
     rake_task = Rake::Task[task_name]
@@ -105,7 +105,7 @@ shared_examples "a task with global parameters" do |task_name|
   end
 
   it 'uses the underlying default vars by default' do
-    define_task
+    define_tasks
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -116,7 +116,7 @@ shared_examples "a task with global parameters" do |task_name|
   it 'uses the provided vars when specified' do
     vars = "./pki/vars"
 
-    define_task(
+    define_tasks(
         vars: vars)
 
     rake_task = Rake::Task[task_name]
@@ -126,7 +126,7 @@ shared_examples "a task with global parameters" do |task_name|
   end
 
   it 'uses batch by default' do
-    define_task
+    define_tasks
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -137,7 +137,7 @@ shared_examples "a task with global parameters" do |task_name|
   it 'uses the provided value for batch when specified' do
     batch = false
 
-    define_task(
+    define_tasks(
         batch: batch)
 
     rake_task = Rake::Task[task_name]
@@ -147,7 +147,7 @@ shared_examples "a task with global parameters" do |task_name|
   end
 
   it 'uses the underlying default input password by default' do
-    define_task
+    define_tasks
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -158,7 +158,7 @@ shared_examples "a task with global parameters" do |task_name|
   it 'uses the provided input password when specified' do
     input_password = 'pass:1234'
 
-    define_task(
+    define_tasks(
         input_password: input_password)
 
     rake_task = Rake::Task[task_name]
@@ -168,7 +168,7 @@ shared_examples "a task with global parameters" do |task_name|
   end
 
   it 'uses the underlying default output password by default' do
-    define_task
+    define_tasks
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -179,7 +179,7 @@ shared_examples "a task with global parameters" do |task_name|
   it 'uses the provided output password when specified' do
     output_password = 'pass:1234'
 
-    define_task(
+    define_tasks(
         output_password: output_password)
 
     rake_task = Rake::Task[task_name]

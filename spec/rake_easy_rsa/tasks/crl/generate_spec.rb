@@ -12,7 +12,7 @@ describe RakeEasyRSA::Tasks::CRL::Generate do
     stub_ruby_easy_rsa
   end
 
-  def define_task(opts = {}, &block)
+  def define_tasks(opts = {}, &block)
     opts = {namespace: :crl}.merge(opts)
 
     namespace opts[:namespace] do
@@ -21,14 +21,14 @@ describe RakeEasyRSA::Tasks::CRL::Generate do
   end
 
   it 'adds a generate task in the namespace in which it is created' do
-    define_task
+    define_tasks
 
     expect(Rake::Task.task_defined?('crl:generate'))
         .to(be(true))
   end
 
   it 'gives the generate task a description' do
-    define_task
+    define_tasks
 
     expect(Rake::Task['crl:generate'].full_comment)
         .to(eq('Generate the certificate revocation list for the PKI'))
@@ -45,7 +45,7 @@ describe RakeEasyRSA::Tasks::CRL::Generate do
             .with(hash_including(
                 directory: directory)))
 
-    define_task(
+    define_tasks(
         directory: directory)
 
     Rake::Task['crl:generate'].invoke

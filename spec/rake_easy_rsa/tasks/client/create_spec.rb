@@ -14,7 +14,7 @@ describe RakeEasyRSA::Tasks::Client::Create do
     stub_ruby_easy_rsa
   end
 
-  def define_task(opts = {}, &block)
+  def define_tasks(opts = {}, &block)
     opts = {namespace: :client}.merge(opts)
 
     namespace opts[:namespace] do
@@ -23,14 +23,14 @@ describe RakeEasyRSA::Tasks::Client::Create do
   end
 
   it 'adds a create task in the namespace in which it is created' do
-    define_task
+    define_tasks
 
     expect(Rake::Task.task_defined?('client:create'))
         .to(be(true))
   end
 
   it 'gives the create task a description' do
-    define_task
+    define_tasks
 
     expect(Rake::Task['client:create'].full_comment)
         .to(eq('Create a client certificate for the PKI'))
@@ -51,7 +51,7 @@ describe RakeEasyRSA::Tasks::Client::Create do
                 filename_base: filename_base,
                 directory: directory)))
 
-    define_task(
+    define_tasks(
         directory: directory)
 
     Rake::Task['client:create'].invoke(filename_base)
