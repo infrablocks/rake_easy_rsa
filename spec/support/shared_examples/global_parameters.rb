@@ -5,19 +5,19 @@ shared_examples "a task with global parameters" do |task_name|
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
 
-    expect(test_task.directory).to(be_nil)
+    expect(test_task.pki_directory).to(be_nil)
   end
 
   it 'uses the specified PKI directory when provided' do
-    directory = 'config/secrets/pki'
+    pki_directory = 'config/secrets/pki'
 
     define_tasks(
-        directory: directory)
+        pki_directory: pki_directory)
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
 
-    expect(test_task.directory).to(eq(directory))
+    expect(test_task.pki_directory).to(eq(pki_directory))
   end
 
   it 'uses the underlying default extensions directory by default' do

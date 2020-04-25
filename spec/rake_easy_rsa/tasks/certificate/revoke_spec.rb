@@ -38,17 +38,17 @@ describe RakeEasyRSA::Tasks::Certificate::Revoke do
   it_behaves_like "a task with ssl parameters", "certificate:revoke"
 
   it 'revokes a certificate' do
-    directory = 'config/secrets/pki'
+    pki_directory = 'config/secrets/pki'
     filename_base = 'some_client'
 
     expect(RubyEasyRSA)
         .to(receive(:revoke)
             .with(hash_including(
                 filename_base: filename_base,
-                directory: directory)))
+                pki_directory: pki_directory)))
 
     define_tasks(
-        directory: directory)
+        pki_directory: pki_directory)
 
     Rake::Task['certificate:revoke'].invoke(filename_base)
   end

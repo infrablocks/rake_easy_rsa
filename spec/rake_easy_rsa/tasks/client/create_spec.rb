@@ -42,17 +42,17 @@ describe RakeEasyRSA::Tasks::Client::Create do
   it_behaves_like "a task with encrypt key parameters", "client:create"
 
   it 'creates a client certificate' do
-    directory = 'config/secrets/pki'
+    pki_directory = 'config/secrets/pki'
     filename_base = 'some_client'
 
     expect(RubyEasyRSA)
         .to(receive(:build_client_full)
             .with(hash_including(
                 filename_base: filename_base,
-                directory: directory)))
+                pki_directory: pki_directory)))
 
     define_tasks(
-        directory: directory)
+        pki_directory: pki_directory)
 
     Rake::Task['client:create'].invoke(filename_base)
   end

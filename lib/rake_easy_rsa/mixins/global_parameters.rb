@@ -4,7 +4,7 @@ module RakeEasyRSA
       def self.included(base)
         super(base)
         base.class_eval do
-          parameter :directory
+          parameter :pki_directory
           parameter :extensions_directory
           parameter :openssl_binary
           parameter :ssl_configuration

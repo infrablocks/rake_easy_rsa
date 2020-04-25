@@ -38,15 +38,15 @@ describe RakeEasyRSA::Tasks::DH::Generate do
   it_behaves_like "a task with ssl parameters", "dh:generate"
 
   it 'generates Diffie-Hellman parameters' do
-    directory = 'config/secrets/pki'
+    pki_directory = 'config/secrets/pki'
 
     expect(RubyEasyRSA)
         .to(receive(:gen_dh)
             .with(hash_including(
-                directory: directory)))
+                pki_directory: pki_directory)))
 
     define_tasks(
-        directory: directory)
+        pki_directory: pki_directory)
 
     Rake::Task['dh:generate'].invoke
   end

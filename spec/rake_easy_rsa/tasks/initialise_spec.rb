@@ -38,15 +38,15 @@ describe RakeEasyRSA::Tasks::Initialise do
   it_behaves_like "a task with ssl parameters", "pki:initialise"
 
   it 'initialises PKI' do
-    directory = 'config/secrets/pki'
+    pki_directory = 'config/secrets/pki'
 
     expect(RubyEasyRSA)
         .to(receive(:init_pki)
             .with(hash_including(
-                directory: directory)))
+                pki_directory: pki_directory)))
 
     define_tasks(
-        directory: directory)
+        pki_directory: pki_directory)
 
     Rake::Task['pki:initialise'].invoke
   end

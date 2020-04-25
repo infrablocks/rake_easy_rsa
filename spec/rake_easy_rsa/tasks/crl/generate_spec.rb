@@ -38,15 +38,15 @@ describe RakeEasyRSA::Tasks::CRL::Generate do
   it_behaves_like "a task with ssl parameters", "crl:generate"
 
   it 'generates a CRL' do
-    directory = 'config/secrets/pki'
+    pki_directory = 'config/secrets/pki'
 
     expect(RubyEasyRSA)
         .to(receive(:gen_crl)
             .with(hash_including(
-                directory: directory)))
+                pki_directory: pki_directory)))
 
     define_tasks(
-        directory: directory)
+        pki_directory: pki_directory)
 
     Rake::Task['crl:generate'].invoke
   end

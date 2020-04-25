@@ -40,17 +40,17 @@ describe RakeEasyRSA::Tasks::Certificate::Renew do
   it_behaves_like "a task with encrypt key parameters", "certificate:renew"
 
   it 'renews a certificate' do
-    directory = 'config/secrets/pki'
+    pki_directory = 'config/secrets/pki'
     filename_base = 'some_client'
 
     expect(RubyEasyRSA)
         .to(receive(:renew)
             .with(hash_including(
                 filename_base: filename_base,
-                directory: directory)))
+                pki_directory: pki_directory)))
 
     define_tasks(
-        directory: directory)
+        pki_directory: pki_directory)
 
     Rake::Task['certificate:renew'].invoke(filename_base)
   end

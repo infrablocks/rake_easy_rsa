@@ -42,15 +42,15 @@ describe RakeEasyRSA::Tasks::CA::Create do
   it_behaves_like "a task with encrypt key parameters", "ca:create"
 
   it 'builds a CA' do
-    directory = 'config/secrets/pki'
+    pki_directory = 'config/secrets/pki'
 
     expect(RubyEasyRSA)
         .to(receive(:build_ca)
             .with(hash_including(
-                directory: directory)))
+                pki_directory: pki_directory)))
 
     define_tasks(
-        directory: directory)
+        pki_directory: pki_directory)
 
     Rake::Task['ca:create'].invoke
   end
