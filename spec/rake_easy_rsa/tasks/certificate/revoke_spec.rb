@@ -34,6 +34,27 @@ describe RakeEasyRSA::Tasks::Certificate::Revoke do
         .to(eq('Revoke a certificate of the PKI'))
   end
 
+  it 'uses a reason of unspecified by default' do
+    define_tasks
+
+    rake_task = Rake::Task['certificate:revoke']
+    test_task = rake_task.creator
+
+    expect(test_task.reason).to(eq('unspecified'))
+  end
+
+  it 'uses the specified reason when provided' do
+    reason = "affiliationChanged"
+
+    define_tasks(
+        reason: reason)
+
+    rake_task = Rake::Task['certificate:revoke']
+    test_task = rake_task.creator
+
+    expect(test_task.reason).to(eq(reason))
+  end
+
   it_behaves_like "a task with global parameters", "certificate:revoke"
   it_behaves_like "a task with ssl parameters", "certificate:revoke"
 
