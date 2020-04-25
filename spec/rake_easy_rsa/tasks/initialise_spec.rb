@@ -4,6 +4,7 @@ require 'ruby_easy_rsa'
 require_relative '../../support/shared_examples/global_parameters'
 require_relative '../../support/shared_examples/ssl_parameters'
 require_relative '../../support/shared_examples/gitkeep_parameters'
+require_relative '../../support/shared_examples/easy_rsa_ensure_prerequisite'
 
 describe RakeEasyRSA::Tasks::Initialise do
   include_context :rake
@@ -16,6 +17,10 @@ describe RakeEasyRSA::Tasks::Initialise do
 
   def define_tasks(opts = {}, &block)
     opts = {namespace: :pki}.merge(opts)
+
+    namespace :easy_rsa do
+      task :ensure
+    end
 
     namespace opts[:namespace] do
       subject.define(opts, &block)
@@ -39,6 +44,7 @@ describe RakeEasyRSA::Tasks::Initialise do
   it_behaves_like "a task with global parameters", "pki:initialise"
   it_behaves_like "a task with ssl parameters", "pki:initialise"
   it_behaves_like "a task with gitkeep parameters", "pki:initialise"
+  it_behaves_like "a task depending on easy rsa", "pki:initialise"
 
   it 'initialises PKI' do
     pki_directory = 'config/secrets/pki'

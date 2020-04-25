@@ -5,6 +5,7 @@ require_relative '../../../support/shared_examples/global_parameters'
 require_relative '../../../support/shared_examples/ssl_parameters'
 require_relative '../../../support/shared_examples/algorithm_parameters'
 require_relative '../../../support/shared_examples/encrypt_key_parameters'
+require_relative '../../../support/shared_examples/easy_rsa_ensure_prerequisite'
 
 describe RakeEasyRSA::Tasks::Client::Create do
   include_context :rake
@@ -16,6 +17,10 @@ describe RakeEasyRSA::Tasks::Client::Create do
 
   def define_tasks(opts = {}, &block)
     opts = {namespace: :client}.merge(opts)
+
+    namespace :easy_rsa do
+      task :ensure
+    end
 
     namespace opts[:namespace] do
       subject.define(opts, &block)
@@ -40,6 +45,7 @@ describe RakeEasyRSA::Tasks::Client::Create do
   it_behaves_like "a task with ssl parameters", "client:create"
   it_behaves_like "a task with algorithm parameters", "client:create"
   it_behaves_like "a task with encrypt key parameters", "client:create"
+  it_behaves_like "a task depending on easy rsa", "client:create"
 
   it 'creates a client certificate' do
     pki_directory = 'config/secrets/pki'

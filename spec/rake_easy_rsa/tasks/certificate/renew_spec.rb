@@ -4,6 +4,7 @@ require 'ruby_easy_rsa'
 require_relative '../../../support/shared_examples/global_parameters'
 require_relative '../../../support/shared_examples/ssl_parameters'
 require_relative '../../../support/shared_examples/encrypt_key_parameters'
+require_relative '../../../support/shared_examples/easy_rsa_ensure_prerequisite'
 
 describe RakeEasyRSA::Tasks::Certificate::Renew do
   include_context :rake
@@ -15,6 +16,10 @@ describe RakeEasyRSA::Tasks::Certificate::Renew do
 
   def define_tasks(opts = {}, &block)
     opts = {namespace: :certificate}.merge(opts)
+
+    namespace :easy_rsa do
+      task :ensure
+    end
 
     namespace opts[:namespace] do
       subject.define(opts, &block)
@@ -38,6 +43,7 @@ describe RakeEasyRSA::Tasks::Certificate::Renew do
   it_behaves_like "a task with global parameters", "certificate:renew"
   it_behaves_like "a task with ssl parameters", "certificate:renew"
   it_behaves_like "a task with encrypt key parameters", "certificate:renew"
+  it_behaves_like "a task depending on easy rsa", "certificate:renew"
 
   it 'renews a certificate' do
     pki_directory = 'config/secrets/pki'

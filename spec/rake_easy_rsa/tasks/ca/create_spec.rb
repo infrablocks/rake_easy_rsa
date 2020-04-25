@@ -6,6 +6,7 @@ require_relative '../../../support/shared_examples/ssl_parameters'
 require_relative '../../../support/shared_examples/algorithm_parameters'
 require_relative '../../../support/shared_examples/encrypt_key_parameters'
 require_relative '../../../support/shared_examples/gitkeep_parameters'
+require_relative '../../../support/shared_examples/easy_rsa_ensure_prerequisite'
 
 describe RakeEasyRSA::Tasks::CA::Create do
   include_context :rake
@@ -18,6 +19,10 @@ describe RakeEasyRSA::Tasks::CA::Create do
 
   def define_tasks(opts = {}, &block)
     opts = {namespace: :ca}.merge(opts)
+
+    namespace :easy_rsa do
+      task :ensure
+    end
 
     namespace opts[:namespace] do
       subject.define(opts, &block)
@@ -43,6 +48,7 @@ describe RakeEasyRSA::Tasks::CA::Create do
   it_behaves_like "a task with algorithm parameters", "ca:create"
   it_behaves_like "a task with encrypt key parameters", "ca:create"
   it_behaves_like "a task with gitkeep parameters", "ca:create"
+  it_behaves_like "a task depending on easy rsa", "ca:create"
 
   it 'builds a CA' do
     pki_directory = 'config/secrets/pki'

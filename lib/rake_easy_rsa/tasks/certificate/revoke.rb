@@ -3,6 +3,7 @@ require 'ruby_easy_rsa'
 
 require_relative '../../mixins/global_parameters'
 require_relative '../../mixins/ssl_parameters'
+require_relative '../../mixins/easy_rsa_ensure_prerequisite'
 
 module RakeEasyRSA
   module Tasks
@@ -10,6 +11,7 @@ module RakeEasyRSA
       class Revoke < RakeFactory::Task
         include Mixins::GlobalParameters
         include Mixins::SSLParameters
+        include Mixins::EasyRSAEnsurePrerequisite
 
         default_name :revoke
         default_argument_names [:filename_base, :reason]

@@ -4,6 +4,7 @@ require 'ruby_easy_rsa'
 require_relative '../mixins/global_parameters'
 require_relative '../mixins/ssl_parameters'
 require_relative '../mixins/gitkeep_parameters'
+require_relative '../mixins/easy_rsa_ensure_prerequisite'
 
 module RakeEasyRSA
   module Tasks
@@ -11,6 +12,7 @@ module RakeEasyRSA
       include Mixins::GlobalParameters
       include Mixins::SSLParameters
       include Mixins::GitkeepParameters
+      include Mixins::EasyRSAEnsurePrerequisite
 
       default_name :initialise
       default_description "Initialise the PKI working directory"

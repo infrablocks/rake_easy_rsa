@@ -4,6 +4,7 @@ require 'ruby_easy_rsa'
 require_relative '../../mixins/global_parameters'
 require_relative '../../mixins/ssl_parameters'
 require_relative '../../mixins/encrypt_key_parameters'
+require_relative '../../mixins/easy_rsa_ensure_prerequisite'
 
 module RakeEasyRSA
   module Tasks
@@ -12,6 +13,7 @@ module RakeEasyRSA
         include Mixins::GlobalParameters
         include Mixins::SSLParameters
         include Mixins::EncryptKeyParameters
+        include Mixins::EasyRSAEnsurePrerequisite
 
         default_name :renew
         default_argument_names [:filename_base]
