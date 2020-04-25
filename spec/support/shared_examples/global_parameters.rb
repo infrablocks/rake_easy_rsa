@@ -1,11 +1,11 @@
 shared_examples "a task with global parameters" do |task_name|
-  it 'uses the underlying default PKI directory by default' do
+  it 'uses a PKI directory of ./pki by default' do
     define_tasks
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
 
-    expect(test_task.pki_directory).to(be_nil)
+    expect(test_task.pki_directory).to(eq('./pki'))
   end
 
   it 'uses the specified PKI directory when provided' do
