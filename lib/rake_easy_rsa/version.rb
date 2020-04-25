@@ -1,3 +1,3 @@
 module RakeEasyRSA
-  VERSION = '0.2.0.pre.11'
+  VERSION = '0.3.0'
 end
