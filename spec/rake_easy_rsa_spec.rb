@@ -111,4 +111,26 @@ RSpec.describe RakeEasyRSA do
       end
     end
   end
+
+  context 'define_pki_tasks' do
+    context 'when instantiating RakeEasyRSA::TaskSets::PKI' do
+      it 'passes the provided block' do
+        opts = {
+            common_name: 'Some PKI'
+        }
+
+        block = lambda do |t|
+          t.directory = './secrets/pki'
+        end
+
+        expect(RakeEasyRSA::TaskSets::PKI)
+            .to(receive(:define) do |passed_opts, &passed_block|
+              expect(passed_opts).to(eq(opts))
+              expect(passed_block).to(eq(block))
+            end)
+
+        RakeEasyRSA.define_pki_tasks(opts, &block)
+      end
+    end
+  end
 end

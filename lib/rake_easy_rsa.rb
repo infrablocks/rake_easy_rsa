@@ -37,4 +37,8 @@ module RakeEasyRSA
 
     RakeDependencies::TaskSets::All.define(task_set_opts)
   end
+
+  def self.define_pki_tasks(opts = {}, &block)
+    RakeEasyRSA::TaskSets::PKI.define(opts, &block)
+  end
 end
