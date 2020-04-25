@@ -74,6 +74,43 @@ describe RakeEasyRSA::Tasks::Certificate::Revoke do
     Rake::Task['certificate:revoke'].invoke(filename_base)
   end
 
+  it 'accepts a reason as an optional argument' do
+    pki_directory = 'config/secrets/pki'
+    filename_base = 'some_client'
+    reason = "CACompromise"
+
+    expect(RubyEasyRSA)
+        .to(receive(:revoke)
+            .with(hash_including(
+                filename_base: filename_base,
+                pki_directory: pki_directory,
+                reason: reason)))
+
+    define_tasks(
+        pki_directory: pki_directory)
+
+    Rake::Task['certificate:revoke'].invoke(filename_base, reason)
+  end
+
+  it 'uses the reason parameter value by default' do
+    pki_directory = 'config/secrets/pki'
+    filename_base = 'some_client'
+    reason = "affiliationChanged"
+
+    expect(RubyEasyRSA)
+        .to(receive(:revoke)
+            .with(hash_including(
+                filename_base: filename_base,
+                pki_directory: pki_directory,
+                reason: reason)))
+
+    define_tasks(
+        pki_directory: pki_directory,
+        reason: reason)
+
+    Rake::Task['certificate:revoke'].invoke(filename_base)
+  end
+
   def stub_output
     [:print, :puts].each do |method|
       allow_any_instance_of(Kernel).to(receive(method))
