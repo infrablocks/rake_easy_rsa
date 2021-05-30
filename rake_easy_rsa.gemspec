@@ -6,12 +6,12 @@ require 'rake_easy_rsa/version'
 Gem::Specification.new do |spec|
   spec.name = 'rake_easy_rsa'
   spec.version = RakeEasyRSA::VERSION
-  spec.authors = ['Toby Clemson']
-  spec.email = ['tobyclemson@gmail.com']
+  spec.authors = ['InfraBlocks Maintainers']
+  spec.email = ['maintainers@infrablocks.io']
 
   spec.summary = 'Rake tasks for managing PKI using EasyRSA.'
   spec.description = 'Rake tasks for common PKI management tasks using EasyRSA.'
-  spec.homepage = "https://github.com/tobyclemson/rake_easy_rsa"
+  spec.homepage = "https://github.com/infrablocks/rake_easy_rsa"
   spec.license = 'MIT'
 
   spec.files = `git ls-files -z`.split("\x0").select do |f|
