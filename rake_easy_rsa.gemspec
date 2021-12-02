@@ -37,6 +37,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.9'
   spec.add_development_dependency 'gem-release', '~> 2.0'
   spec.add_development_dependency 'activesupport', '>= 4'
-  spec.add_development_dependency 'fakefs', '~> 0.18'
+  spec.add_development_dependency 'fakefs', '~> 1.4'
   spec.add_development_dependency 'simplecov', '~> 0.16'
 end
