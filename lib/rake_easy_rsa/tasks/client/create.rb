@@ -17,15 +17,20 @@ module RakeEasyRSA
         include Mixins::EncryptKeyParameters
         include Mixins::EasyRSAEnsurePrerequisite
 
+        parameter :default_argument_names, default: [:filename_base]
+
         default_name :create
-        default_argument_names [:filename_base]
         default_description "Create a client certificate for the PKI"
+
+        def argument_names
+          @argument_names + default_argument_names
+        end
 
         action do |t, args|
           puts "Creating client certificate '#{args.filename_base}'... "
           RubyEasyRSA.build_client_full(
-              t.parameter_values.merge(
-                  filename_base: args.filename_base))
+            t.parameter_values.merge(
+              filename_base: args.filename_base))
           puts "Done."
         end
       end

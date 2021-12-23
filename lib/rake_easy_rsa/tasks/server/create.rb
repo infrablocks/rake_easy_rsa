@@ -17,9 +17,14 @@ module RakeEasyRSA
         include Mixins::EncryptKeyParameters
         include Mixins::EasyRSAEnsurePrerequisite
 
+        parameter :default_argument_names, default: [:filename_base]
+
         default_name :create
-        default_argument_names [:filename_base]
         default_description "Create a server certificate for the PKI"
+
+        def argument_names
+          @argument_names + default_argument_names
+        end
 
         action do |t, args|
           puts "Creating server certificate '#{args.filename_base}'... "

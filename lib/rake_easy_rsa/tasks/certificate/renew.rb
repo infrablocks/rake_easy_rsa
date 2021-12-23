@@ -15,15 +15,20 @@ module RakeEasyRSA
         include Mixins::EncryptKeyParameters
         include Mixins::EasyRSAEnsurePrerequisite
 
+        parameter :default_argument_names, default: [:filename_base]
+
         default_name :renew
-        default_argument_names [:filename_base]
         default_description "Renew a certificate of the PKI"
+
+        def argument_names
+          @argument_names + default_argument_names
+        end
 
         action do |t, args|
           puts "Renewing certificate '#{args.filename_base}'... "
           RubyEasyRSA.renew(
-              t.parameter_values.merge(
-                  filename_base: args.filename_base))
+            t.parameter_values.merge(
+              filename_base: args.filename_base))
           puts "Done."
         end
       end
