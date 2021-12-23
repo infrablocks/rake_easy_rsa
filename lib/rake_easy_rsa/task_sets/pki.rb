@@ -16,6 +16,8 @@ module RakeEasyRSA
       include Mixins::AlgorithmParameters
       include Mixins::EncryptKeyParameters
 
+      parameter :argument_names, default: []
+
       parameter :initialise_task_name, default: :initialise
       parameter :generate_task_name, default: :generate
 

@@ -64,6 +64,22 @@ describe RakeEasyRSA::TaskSets::PKI do
           .to(be(true))
     end
 
+    it 'uses an empty array for argument names by default' do
+      define_tasks
+
+      rake_task = Rake::Task["initialise"]
+
+      expect(rake_task.creator.argument_names).to(eq([]))
+    end
+
+    it 'uses the provided argument names when supplied' do
+      define_tasks(argument_names: [:org_name])
+
+      rake_task = Rake::Task["initialise"]
+
+      expect(rake_task.creator.argument_names).to(eq([:org_name]))
+    end
+
     it_behaves_like "a task with global parameters", "initialise"
     it_behaves_like "a task with ssl parameters", "initialise"
   end
@@ -81,6 +97,22 @@ describe RakeEasyRSA::TaskSets::PKI do
 
       expect(Rake::Task.task_defined?("prepare"))
           .to(be(true))
+    end
+
+    it 'uses an empty array for argument names by default' do
+      define_tasks
+
+      rake_task = Rake::Task["generate"]
+
+      expect(rake_task.creator.argument_names).to(eq([]))
+    end
+
+    it 'uses the provided argument names when supplied' do
+      define_tasks(argument_names: [:org_name])
+
+      rake_task = Rake::Task["generate"]
+
+      expect(rake_task.creator.argument_names).to(eq([:org_name]))
     end
   end
 
@@ -113,6 +145,22 @@ describe RakeEasyRSA::TaskSets::PKI do
 
         expect(Rake::Task.task_defined?("ca:build"))
             .to(be(true))
+      end
+
+      it 'uses an empty array for argument names by default' do
+        define_tasks
+
+        rake_task = Rake::Task["ca:create"]
+
+        expect(rake_task.creator.argument_names).to(eq([]))
+      end
+
+      it 'uses the provided argument names when supplied' do
+        define_tasks(argument_names: [:org_name])
+
+        rake_task = Rake::Task["ca:create"]
+
+        expect(rake_task.creator.argument_names).to(eq([:org_name]))
       end
 
       it_behaves_like "a task with global parameters", "ca:create"
@@ -152,6 +200,22 @@ describe RakeEasyRSA::TaskSets::PKI do
             .to(be(true))
       end
 
+      it 'uses an empty array for argument names by default' do
+        define_tasks
+
+        rake_task = Rake::Task["crl:generate"]
+
+        expect(rake_task.creator.argument_names).to(eq([]))
+      end
+
+      it 'uses the provided argument names when supplied' do
+        define_tasks(argument_names: [:org_name])
+
+        rake_task = Rake::Task["crl:generate"]
+
+        expect(rake_task.creator.argument_names).to(eq([:org_name]))
+      end
+
       it_behaves_like "a task with global parameters", "crl:generate"
       it_behaves_like "a task with ssl parameters", "crl:generate"
     end
@@ -185,6 +249,22 @@ describe RakeEasyRSA::TaskSets::PKI do
 
         expect(Rake::Task.task_defined?("dh:regenerate"))
             .to(be(true))
+      end
+
+      it 'uses an empty array for argument names by default' do
+        define_tasks
+
+        rake_task = Rake::Task["dh:generate"]
+
+        expect(rake_task.creator.argument_names).to(eq([]))
+      end
+
+      it 'uses the provided argument names when supplied' do
+        define_tasks(argument_names: [:org_name])
+
+        rake_task = Rake::Task["dh:generate"]
+
+        expect(rake_task.creator.argument_names).to(eq([:org_name]))
       end
 
       it_behaves_like "a task with global parameters", "dh:generate"
@@ -222,6 +302,22 @@ describe RakeEasyRSA::TaskSets::PKI do
             .to(be(true))
       end
 
+      it 'uses an empty array for argument names by default' do
+        define_tasks
+
+        rake_task = Rake::Task["client:create"]
+
+        expect(rake_task.creator.argument_names).to(eq([]))
+      end
+
+      it 'uses the provided argument names when supplied' do
+        define_tasks(argument_names: [:org_name])
+
+        rake_task = Rake::Task["client:create"]
+
+        expect(rake_task.creator.argument_names).to(eq([:org_name]))
+      end
+
       it_behaves_like "a task with global parameters", "client:create"
       it_behaves_like "a task with ssl parameters", "client:create"
       it_behaves_like "a task with algorithm parameters", "client:create"
@@ -257,6 +353,22 @@ describe RakeEasyRSA::TaskSets::PKI do
 
         expect(Rake::Task.task_defined?("server:new"))
             .to(be(true))
+      end
+
+      it 'uses an empty array for argument names by default' do
+        define_tasks
+
+        rake_task = Rake::Task["server:create"]
+
+        expect(rake_task.creator.argument_names).to(eq([]))
+      end
+
+      it 'uses the provided argument names when supplied' do
+        define_tasks(argument_names: [:org_name])
+
+        rake_task = Rake::Task["server:create"]
+
+        expect(rake_task.creator.argument_names).to(eq([:org_name]))
       end
 
       it_behaves_like "a task with global parameters", "server:create"
@@ -302,6 +414,22 @@ describe RakeEasyRSA::TaskSets::PKI do
             .to(be(true))
       end
 
+      it 'uses an empty array for argument names by default' do
+        define_tasks
+
+        rake_task = Rake::Task["certificate:revoke"]
+
+        expect(rake_task.creator.argument_names).to(eq([]))
+      end
+
+      it 'uses the provided argument names when supplied' do
+        define_tasks(argument_names: [:org_name])
+
+        rake_task = Rake::Task["certificate:revoke"]
+
+        expect(rake_task.creator.argument_names).to(eq([:org_name]))
+      end
+
       it_behaves_like "a task with global parameters", "certificate:revoke"
       it_behaves_like "a task with ssl parameters", "certificate:revoke"
     end
@@ -320,6 +448,22 @@ describe RakeEasyRSA::TaskSets::PKI do
         expect(Rake::Task
             .task_defined?("certificate:extend"))
             .to(be(true))
+      end
+
+      it 'uses an empty array for argument names by default' do
+        define_tasks
+
+        rake_task = Rake::Task["certificate:renew"]
+
+        expect(rake_task.creator.argument_names).to(eq([]))
+      end
+
+      it 'uses the provided argument names when supplied' do
+        define_tasks(argument_names: [:org_name])
+
+        rake_task = Rake::Task["certificate:renew"]
+
+        expect(rake_task.creator.argument_names).to(eq([:org_name]))
       end
 
       it_behaves_like "a task with global parameters", "certificate:renew"
