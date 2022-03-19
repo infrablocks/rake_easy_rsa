@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rake_easy_rsa (0.10.0.pre.5)
-      rake_dependencies (~> 2.13)
+      rake_dependencies (~> 3.1)
       rake_factory (~> 0.23)
       ruby_easy_rsa (~> 0.7)
       semantic (~> 1.6)
@@ -68,7 +68,7 @@ GEM
       excon (~> 0.72)
       rake_factory (~> 0.23)
       sshkey (~> 2.0)
-    rake_dependencies (2.13.0)
+    rake_dependencies (3.1.0)
       hamster (~> 3.0)
       minitar (~> 0.9)
       rake_factory (~> 0.23)

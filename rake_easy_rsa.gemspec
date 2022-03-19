@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.7'
 
-  spec.add_dependency 'rake_dependencies', '~> 2.13'
+  spec.add_dependency 'rake_dependencies', '~> 3.1'
   spec.add_dependency 'rake_factory', '~> 0.23'
   spec.add_dependency 'ruby_easy_rsa', '~> 0.7'
   spec.add_dependency 'semantic', '~> 1.6'
