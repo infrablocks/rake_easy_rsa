@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake_factory'
 require 'ruby_easy_rsa'
 
@@ -14,7 +16,7 @@ module RakeEasyRSA
         include Mixins::EasyRSAEnsurePrerequisite
 
         parameter(:default_argument_names,
-                  default: [:filename_base, :reason])
+                  default: %i[filename_base reason])
 
         default_name :revoke
         default_description 'Revoke a certificate of the PKI'
@@ -31,7 +33,9 @@ module RakeEasyRSA
           RubyEasyRSA.revoke(
             t.parameter_values.merge(
               reason: reason,
-              filename_base: args.filename_base))
+              filename_base: args.filename_base
+            )
+          )
           puts 'Done.'
         end
       end

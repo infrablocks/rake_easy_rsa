@@ -1,4 +1,6 @@
-shared_examples "a task with global parameters" do |task_name|
+# frozen_string_literal: true
+
+shared_examples 'a task with global parameters' do |task_name|
   it 'uses a PKI directory of ./pki by default' do
     define_tasks
 
@@ -12,7 +14,8 @@ shared_examples "a task with global parameters" do |task_name|
     pki_directory = 'config/secrets/pki'
 
     define_tasks(
-        pki_directory: pki_directory)
+      pki_directory: pki_directory
+    )
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -33,7 +36,8 @@ shared_examples "a task with global parameters" do |task_name|
     extensions_directory = './pki/extensions'
 
     define_tasks(
-        extensions_directory: extensions_directory)
+      extensions_directory: extensions_directory
+    )
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -51,10 +55,11 @@ shared_examples "a task with global parameters" do |task_name|
   end
 
   it 'uses the provided openssl binary when specified' do
-    openssl_binary = "./vendor/openssl/bin/openssl"
+    openssl_binary = './vendor/openssl/bin/openssl'
 
     define_tasks(
-        openssl_binary: openssl_binary)
+      openssl_binary: openssl_binary
+    )
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -72,10 +77,11 @@ shared_examples "a task with global parameters" do |task_name|
   end
 
   it 'uses the provided ssl configuration when specified' do
-    ssl_configuration = "./vendor/easyrsa/openssl-easyrsa.cnf"
+    ssl_configuration = './vendor/easyrsa/openssl-easyrsa.cnf'
 
     define_tasks(
-        ssl_configuration: ssl_configuration)
+      ssl_configuration: ssl_configuration
+    )
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -93,10 +99,11 @@ shared_examples "a task with global parameters" do |task_name|
   end
 
   it 'uses the provided safe configuration when specified' do
-    safe_configuration = "./vendor/easyrsa/safessl-easyrsa.cnf"
+    safe_configuration = './vendor/easyrsa/safessl-easyrsa.cnf'
 
     define_tasks(
-        safe_configuration: safe_configuration)
+      safe_configuration: safe_configuration
+    )
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -114,10 +121,11 @@ shared_examples "a task with global parameters" do |task_name|
   end
 
   it 'uses the provided vars when specified' do
-    vars = "./pki/vars"
+    vars = './pki/vars'
 
     define_tasks(
-        vars: vars)
+      vars: vars
+    )
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -138,7 +146,8 @@ shared_examples "a task with global parameters" do |task_name|
     batch = false
 
     define_tasks(
-        batch: batch)
+      batch: batch
+    )
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -159,7 +168,8 @@ shared_examples "a task with global parameters" do |task_name|
     input_password = 'pass:1234'
 
     define_tasks(
-        input_password: input_password)
+      input_password: input_password
+    )
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -180,7 +190,8 @@ shared_examples "a task with global parameters" do |task_name|
     output_password = 'pass:1234'
 
     define_tasks(
-        output_password: output_password)
+      output_password: output_password
+    )
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator

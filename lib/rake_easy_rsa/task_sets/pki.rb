@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake_factory'
 
 require_relative '../tasks'
@@ -8,6 +10,7 @@ require_relative '../mixins/encrypt_key_parameters'
 
 module RakeEasyRSA
   module TaskSets
+    # rubocop:disable Metrics/ClassLength
     class PKI < RakeFactory::TaskSet
       prepend RakeFactory::Namespaceable
 
@@ -41,88 +44,93 @@ module RakeEasyRSA
       parameter :certificate_renew_task_name, default: :renew
 
       task Tasks::Initialise,
-          name: RakeFactory::DynamicValue.new { |ts|
-            ts.initialise_task_name
-          }
+           name: RakeFactory::DynamicValue.new { |ts|
+             ts.initialise_task_name
+           }
       task Tasks::Generate,
-          name: RakeFactory::DynamicValue.new { |ts|
-            ts.generate_task_name
-          },
-          initialise_task_name: RakeFactory::DynamicValue.new { |ts|
-            ts.initialise_task_name
-          },
-          ca_create_task_name: RakeFactory::DynamicValue.new { |ts|
-            "#{ts.ca_namespace}:#{ts.ca_create_task_name}".to_sym
-          },
-          crl_generate_task_name: RakeFactory::DynamicValue.new { |ts|
-            "#{ts.crl_namespace}:#{ts.crl_generate_task_name}".to_sym
-          },
-          dh_generate_task_name: RakeFactory::DynamicValue.new { |ts|
-            "#{ts.dh_namespace}:#{ts.dh_generate_task_name}".to_sym
-          }
+           name: RakeFactory::DynamicValue.new { |ts|
+             ts.generate_task_name
+           },
+           initialise_task_name: RakeFactory::DynamicValue.new { |ts|
+             ts.initialise_task_name
+           },
+           ca_create_task_name: RakeFactory::DynamicValue.new { |ts|
+             "#{ts.ca_namespace}:#{ts.ca_create_task_name}".to_sym
+           },
+           crl_generate_task_name: RakeFactory::DynamicValue.new { |ts|
+             "#{ts.crl_namespace}:#{ts.crl_generate_task_name}".to_sym
+           },
+           dh_generate_task_name: RakeFactory::DynamicValue.new { |ts|
+             "#{ts.dh_namespace}:#{ts.dh_generate_task_name}".to_sym
+           }
       task Tasks::CA::Create,
-          name: RakeFactory::DynamicValue.new { |ts|
-            ts.ca_create_task_name
-          }
+           name: RakeFactory::DynamicValue.new { |ts|
+             ts.ca_create_task_name
+           }
       task Tasks::CRL::Generate,
-          name: RakeFactory::DynamicValue.new { |ts|
-            ts.crl_generate_task_name
-          }
+           name: RakeFactory::DynamicValue.new { |ts|
+             ts.crl_generate_task_name
+           }
       task Tasks::DH::Generate,
-          name: RakeFactory::DynamicValue.new { |ts|
-            ts.dh_generate_task_name
-          }
+           name: RakeFactory::DynamicValue.new { |ts|
+             ts.dh_generate_task_name
+           }
       task Tasks::Client::Create,
-          name: RakeFactory::DynamicValue.new { |ts|
-            ts.client_create_task_name
-          }
+           name: RakeFactory::DynamicValue.new { |ts|
+             ts.client_create_task_name
+           }
       task Tasks::Server::Create,
-          name: RakeFactory::DynamicValue.new { |ts|
-            ts.server_create_task_name
-          }
+           name: RakeFactory::DynamicValue.new { |ts|
+             ts.server_create_task_name
+           }
       task Tasks::Certificate::Revoke,
-          name: RakeFactory::DynamicValue.new { |ts|
-            ts.certificate_revoke_task_name
-          }
+           name: RakeFactory::DynamicValue.new { |ts|
+             ts.certificate_revoke_task_name
+           }
       task Tasks::Certificate::Renew,
-          name: RakeFactory::DynamicValue.new { |ts|
-            ts.certificate_renew_task_name
-          }
+           name: RakeFactory::DynamicValue.new { |ts|
+             ts.certificate_renew_task_name
+           }
 
       def define_on(application)
         around_define(application) do
           self.class.tasks.each do |task_definition|
-            ns = case task_definition.klass.to_s
-            when /CA/
-              ca_namespace
-            when /CRL/
-              crl_namespace
-            when /DH/
-              dh_namespace
-            when /Client/
-              client_namespace
-            when /Server/
-              server_namespace
-            when /Certificate/
-              certificate_namespace
-            else
-              nil
-            end
+            namespace = resolve_namespace(task_definition)
 
-            if ns
-              application.in_namespace(ns) do
-                task_definition
-                    .for_task_set(self)
-                    .define_on(application)
-              end
+            if namespace
+              define_in_namespace(namespace, application, task_definition)
             else
-              task_definition
-                  .for_task_set(self)
-                  .define_on(application)
+              define_at_current_level(application, task_definition)
             end
           end
         end
       end
+
+      private
+
+      def define_in_namespace(namespace, application, task_definition)
+        application.in_namespace(namespace) do
+          define_at_current_level(application, task_definition)
+        end
+      end
+
+      def resolve_namespace(task_definition)
+        case task_definition.klass.to_s
+        when /CA/ then ca_namespace
+        when /CRL/ then crl_namespace
+        when /DH/ then dh_namespace
+        when /Client/ then client_namespace
+        when /Server/ then server_namespace
+        when /Certificate/ then certificate_namespace
+        end
+      end
+
+      def define_at_current_level(application, task_definition)
+        task_definition
+          .for_task_set(self)
+          .define_on(application)
+      end
     end
+    # rubocop:enable Metrics/ClassLength
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake_factory'
 require 'ruby_easy_rsa'
 
@@ -20,7 +22,7 @@ module RakeEasyRSA
         parameter :default_argument_names, default: [:filename_base]
 
         default_name :create
-        default_description "Create a client certificate for the PKI"
+        default_description 'Create a client certificate for the PKI'
 
         def argument_names
           @argument_names + default_argument_names
@@ -30,8 +32,10 @@ module RakeEasyRSA
           puts "Creating client certificate '#{args.filename_base}'... "
           RubyEasyRSA.build_client_full(
             t.parameter_values.merge(
-              filename_base: args.filename_base))
-          puts "Done."
+              filename_base: args.filename_base
+            )
+          )
+          puts 'Done.'
         end
       end
     end

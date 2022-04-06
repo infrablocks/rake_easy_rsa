@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake_factory'
 
 module RakeEasyRSA
@@ -7,9 +9,9 @@ module RakeEasyRSA
         super(base)
         base.class_eval do
           parameter :ensure_task_name, default: :'easy_rsa:ensure'
-          default_prerequisites RakeFactory::DynamicValue.new { |t|
+          default_prerequisites(RakeFactory::DynamicValue.new do |t|
             [t.ensure_task_name]
-          }
+          end)
         end
       end
     end

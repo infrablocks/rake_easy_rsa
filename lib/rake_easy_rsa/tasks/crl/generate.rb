@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake_factory'
 require 'ruby_easy_rsa'
 
@@ -15,12 +17,13 @@ module RakeEasyRSA
 
         default_name :generate
         default_description(
-            "Generate the certificate revocation list for the PKI")
+          'Generate the certificate revocation list for the PKI'
+        )
 
         action do |t|
-          puts "Generating CRL... "
+          puts 'Generating CRL... '
           RubyEasyRSA.gen_crl(t.parameter_values)
-          puts "Done."
+          puts 'Done.'
         end
       end
     end

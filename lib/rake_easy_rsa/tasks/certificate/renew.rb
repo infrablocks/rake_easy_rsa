@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake_factory'
 require 'ruby_easy_rsa'
 
@@ -18,7 +20,7 @@ module RakeEasyRSA
         parameter :default_argument_names, default: [:filename_base]
 
         default_name :renew
-        default_description "Renew a certificate of the PKI"
+        default_description 'Renew a certificate of the PKI'
 
         def argument_names
           @argument_names + default_argument_names
@@ -28,8 +30,10 @@ module RakeEasyRSA
           puts "Renewing certificate '#{args.filename_base}'... "
           RubyEasyRSA.renew(
             t.parameter_values.merge(
-              filename_base: args.filename_base))
-          puts "Done."
+              filename_base: args.filename_base
+            )
+          )
+          puts 'Done.'
         end
       end
     end

@@ -1,4 +1,6 @@
-shared_examples "a task with algorithm parameters" do |task_name|
+# frozen_string_literal: true
+
+shared_examples 'a task with algorithm parameters' do |task_name|
   it 'uses the underlying default algorithm by default' do
     define_tasks
 
@@ -9,10 +11,11 @@ shared_examples "a task with algorithm parameters" do |task_name|
   end
 
   it 'uses the specified algorithm when provided' do
-    algorithm = "ec"
+    algorithm = 'ec'
 
     define_tasks(
-        algorithm: algorithm)
+      algorithm: algorithm
+    )
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -30,10 +33,11 @@ shared_examples "a task with algorithm parameters" do |task_name|
   end
 
   it 'uses the provided curve when specified' do
-    curve = "sect571k1"
+    curve = 'sect571k1'
 
     define_tasks(
-        curve: curve)
+      curve: curve
+    )
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator
@@ -51,10 +55,11 @@ shared_examples "a task with algorithm parameters" do |task_name|
   end
 
   it 'uses the provided EC directory when specified' do
-    ec_directory = "./ec"
+    ec_directory = './ec'
 
     define_tasks(
-        ec_directory: ec_directory)
+      ec_directory: ec_directory
+    )
 
     rake_task = Rake::Task[task_name]
     test_task = rake_task.creator

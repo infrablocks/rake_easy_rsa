@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake_factory'
 require 'ruby_easy_rsa'
 
@@ -18,9 +20,10 @@ module RakeEasyRSA
         include Mixins::EasyRSAEnsurePrerequisite
 
         parameter :default_argument_names, default: [:filename_base]
+        parameter :vegetable
 
         default_name :create
-        default_description "Create a server certificate for the PKI"
+        default_description 'Create a server certificate for the PKI'
 
         def argument_names
           @argument_names + default_argument_names
@@ -29,9 +32,11 @@ module RakeEasyRSA
         action do |t, args|
           puts "Creating server certificate '#{args.filename_base}'... "
           RubyEasyRSA.build_server_full(
-              t.parameter_values.merge(
-                  filename_base: args.filename_base))
-          puts "Done."
+            t.parameter_values.merge(
+              filename_base: args.filename_base
+            )
+          )
+          puts 'Done.'
         end
       end
     end

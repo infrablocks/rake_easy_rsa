@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake_factory'
 require 'ruby_easy_rsa'
 
@@ -15,12 +17,13 @@ module RakeEasyRSA
 
         default_name :generate
         default_description(
-            "Generate Diffie-Hellman parameters for the PKI")
+          'Generate Diffie-Hellman parameters for the PKI'
+        )
 
         action do |t|
-          puts "Generating Diffie-Hellman parameters... "
+          puts 'Generating Diffie-Hellman parameters... '
           RubyEasyRSA.gen_dh(t.parameter_values)
-          puts "Done."
+          puts 'Done.'
         end
       end
     end

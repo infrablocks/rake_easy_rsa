@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 module RakeEasyRSA
   module Mixins
     module GlobalParameters
+      # rubocop:disable Metrics/MethodLength
       def self.included(base)
         super(base)
         base.class_eval do
@@ -15,6 +18,7 @@ module RakeEasyRSA
           parameter :output_password
         end
       end
+      # rubocop:enable Metrics/MethodLength
     end
   end
 end
