@@ -58,8 +58,8 @@ module RakeEasyRSA
     end
 
     def uri_template(_)
-      'https://github.com/OpenVPN/easy-rsa/releases/'\
-        'download/v<%= @version %>/'\
+      'https://github.com/OpenVPN/easy-rsa/releases/' \
+        'download/v<%= @version %>/' \
         'EasyRSA-<%= @version %>.tgz'
     end
 

@@ -309,7 +309,7 @@ describe RakeEasyRSA::TaskSets::PKI do
         expect(rake_task.creator.argument_names).to(eq([:filename_base]))
       end
 
-      it 'uses the provided and default argument names for the task '\
+      it 'uses the provided and default argument names for the task ' \
          'when supplied' do
         define_tasks(argument_names: [:org_name])
 
@@ -364,7 +364,7 @@ describe RakeEasyRSA::TaskSets::PKI do
         expect(rake_task.creator.argument_names).to(eq([:filename_base]))
       end
 
-      it 'uses the provided and default argument names for the task '\
+      it 'uses the provided and default argument names for the task ' \
          'when supplied' do
         define_tasks(argument_names: [:org_name])
 
@@ -427,7 +427,7 @@ describe RakeEasyRSA::TaskSets::PKI do
           .to(eq(%i[filename_base reason]))
       end
 
-      it 'uses the provided and default argument names for the task '\
+      it 'uses the provided and default argument names for the task ' \
          'when supplied' do
         define_tasks(argument_names: [:org_name])
 
@@ -464,7 +464,7 @@ describe RakeEasyRSA::TaskSets::PKI do
         expect(rake_task.creator.argument_names).to(eq([:filename_base]))
       end
 
-      it 'uses the provided and default argument names for the task '\
+      it 'uses the provided and default argument names for the task ' \
          'when supplied' do
         define_tasks(argument_names: [:org_name])
 
