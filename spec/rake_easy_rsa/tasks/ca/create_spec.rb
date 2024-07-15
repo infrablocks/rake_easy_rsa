@@ -19,7 +19,7 @@ describe RakeEasyRSA::Tasks::CA::Create do
     stub_ruby_easy_rsa
   end
 
-  def define_tasks(opts = {}, &block)
+  def define_tasks(opts = {}, &)
     opts = { namespace: :ca }.merge(opts)
 
     namespace :easy_rsa do
@@ -27,7 +27,7 @@ describe RakeEasyRSA::Tasks::CA::Create do
     end
 
     namespace opts[:namespace] do
-      subject.define(opts, &block)
+      subject.define(opts, &)
     end
   end
 
@@ -59,7 +59,7 @@ describe RakeEasyRSA::Tasks::CA::Create do
       .to(receive(:build_ca))
 
     define_tasks(
-      pki_directory: pki_directory
+      pki_directory:
     )
 
     Rake::Task['ca:create'].invoke
@@ -67,7 +67,7 @@ describe RakeEasyRSA::Tasks::CA::Create do
     expect(RubyEasyRSA)
       .to(have_received(:build_ca)
             .with(hash_including(
-                    pki_directory: pki_directory
+                    pki_directory:
                   )))
   end
 
@@ -78,7 +78,7 @@ describe RakeEasyRSA::Tasks::CA::Create do
     allow(File).to(receive(:write))
 
     define_tasks(
-      pki_directory: pki_directory
+      pki_directory:
     )
 
     Rake::Task['ca:create'].invoke
@@ -117,8 +117,8 @@ describe RakeEasyRSA::Tasks::CA::Create do
     allow(File).to(receive(:write))
 
     define_tasks(
-      pki_directory: pki_directory,
-      include_gitkeep_files: include_gitkeep_files
+      pki_directory:,
+      include_gitkeep_files:
     )
 
     Rake::Task['ca:create'].invoke

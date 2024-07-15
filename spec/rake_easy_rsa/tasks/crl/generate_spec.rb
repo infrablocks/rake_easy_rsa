@@ -15,7 +15,7 @@ describe RakeEasyRSA::Tasks::CRL::Generate do
     stub_ruby_easy_rsa
   end
 
-  def define_tasks(opts = {}, &block)
+  def define_tasks(opts = {}, &)
     opts = { namespace: :crl }.merge(opts)
 
     namespace :easy_rsa do
@@ -23,7 +23,7 @@ describe RakeEasyRSA::Tasks::CRL::Generate do
     end
 
     namespace opts[:namespace] do
-      subject.define(opts, &block)
+      subject.define(opts, &)
     end
   end
 
@@ -51,7 +51,7 @@ describe RakeEasyRSA::Tasks::CRL::Generate do
     allow(RubyEasyRSA).to(receive(:gen_crl))
 
     define_tasks(
-      pki_directory: pki_directory
+      pki_directory:
     )
 
     Rake::Task['crl:generate'].invoke
@@ -59,7 +59,7 @@ describe RakeEasyRSA::Tasks::CRL::Generate do
     expect(RubyEasyRSA)
       .to(have_received(:gen_crl)
             .with(hash_including(
-                    pki_directory: pki_directory
+                    pki_directory:
                   )))
   end
 

@@ -17,7 +17,7 @@ describe RakeEasyRSA::Tasks::Server::Create do
     stub_ruby_easy_rsa
   end
 
-  def define_tasks(opts = {}, &block)
+  def define_tasks(opts = {}, &)
     opts = { namespace: :server }.merge(opts)
 
     namespace :easy_rsa do
@@ -25,7 +25,7 @@ describe RakeEasyRSA::Tasks::Server::Create do
     end
 
     namespace opts[:namespace] do
-      subject.define(opts, &block)
+      subject.define(opts, &)
     end
   end
 
@@ -56,7 +56,7 @@ describe RakeEasyRSA::Tasks::Server::Create do
     allow(RubyEasyRSA).to(receive(:build_server_full))
 
     define_tasks(
-      pki_directory: pki_directory
+      pki_directory:
     )
 
     Rake::Task['server:create'].invoke(filename_base)
@@ -64,8 +64,8 @@ describe RakeEasyRSA::Tasks::Server::Create do
     expect(RubyEasyRSA)
       .to(have_received(:build_server_full)
             .with(hash_including(
-                    filename_base: filename_base,
-                    pki_directory: pki_directory
+                    filename_base:,
+                    pki_directory:
                   )))
   end
 

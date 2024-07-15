@@ -17,7 +17,7 @@ describe RakeEasyRSA::Tasks::Initialise do
     stub_ruby_easy_rsa
   end
 
-  def define_tasks(opts = {}, &block)
+  def define_tasks(opts = {}, &)
     opts = { namespace: :pki }.merge(opts)
 
     namespace :easy_rsa do
@@ -25,7 +25,7 @@ describe RakeEasyRSA::Tasks::Initialise do
     end
 
     namespace opts[:namespace] do
-      subject.define(opts, &block)
+      subject.define(opts, &)
     end
   end
 
@@ -55,14 +55,14 @@ describe RakeEasyRSA::Tasks::Initialise do
       .to(receive(:init_pki))
 
     define_tasks(
-      pki_directory: pki_directory
+      pki_directory:
     )
 
     Rake::Task['pki:initialise'].invoke
 
     expect(RubyEasyRSA)
       .to(have_received(:init_pki)
-            .with(hash_including(pki_directory: pki_directory)))
+            .with(hash_including(pki_directory:)))
   end
 
   # rubocop:disable RSpec/MultipleExpectations
@@ -72,7 +72,7 @@ describe RakeEasyRSA::Tasks::Initialise do
     allow(File).to(receive(:write))
 
     define_tasks(
-      pki_directory: pki_directory
+      pki_directory:
     )
 
     Rake::Task['pki:initialise'].invoke
@@ -93,8 +93,8 @@ describe RakeEasyRSA::Tasks::Initialise do
     allow(File).to(receive(:open))
 
     define_tasks(
-      pki_directory: pki_directory,
-      include_gitkeep_files: include_gitkeep_files
+      pki_directory:,
+      include_gitkeep_files:
     )
 
     Rake::Task['pki:initialise'].invoke

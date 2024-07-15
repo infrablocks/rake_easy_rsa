@@ -14,7 +14,7 @@ shared_examples 'a task with ssl parameters' do |task_name|
     expires_in_days = '90'
 
     define_tasks(
-      expires_in_days: expires_in_days
+      expires_in_days:
     )
 
     rake_task = Rake::Task[task_name]
@@ -36,7 +36,7 @@ shared_examples 'a task with ssl parameters' do |task_name|
     digest = 'sha512'
 
     define_tasks(
-      digest: digest
+      digest:
     )
 
     rake_task = Rake::Task[task_name]
@@ -58,7 +58,7 @@ shared_examples 'a task with ssl parameters' do |task_name|
     distinguished_name_mode = 'org'
 
     define_tasks(
-      distinguished_name_mode: distinguished_name_mode
+      distinguished_name_mode:
     )
 
     rake_task = Rake::Task[task_name]
@@ -80,7 +80,7 @@ shared_examples 'a task with ssl parameters' do |task_name|
     common_name = 'server.example.com'
 
     define_tasks(
-      common_name: common_name
+      common_name:
     )
 
     rake_task = Rake::Task[task_name]
@@ -102,7 +102,7 @@ shared_examples 'a task with ssl parameters' do |task_name|
     country = 'GB'
 
     define_tasks(
-      country: country
+      country:
     )
 
     rake_task = Rake::Task[task_name]
@@ -124,7 +124,7 @@ shared_examples 'a task with ssl parameters' do |task_name|
     province = 'Greater London'
 
     define_tasks(
-      province: province
+      province:
     )
 
     rake_task = Rake::Task[task_name]
@@ -146,7 +146,7 @@ shared_examples 'a task with ssl parameters' do |task_name|
     city = 'London'
 
     define_tasks(
-      city: city
+      city:
     )
 
     rake_task = Rake::Task[task_name]
@@ -168,7 +168,7 @@ shared_examples 'a task with ssl parameters' do |task_name|
     organisation = 'Company Ltd.'
 
     define_tasks(
-      organisation: organisation
+      organisation:
     )
 
     rake_task = Rake::Task[task_name]
@@ -190,7 +190,7 @@ shared_examples 'a task with ssl parameters' do |task_name|
     organisational_unit = 'Finance'
 
     define_tasks(
-      organisational_unit: organisational_unit
+      organisational_unit:
     )
 
     rake_task = Rake::Task[task_name]
@@ -212,7 +212,7 @@ shared_examples 'a task with ssl parameters' do |task_name|
     email = 'someone@example.com'
 
     define_tasks(
-      email: email
+      email:
     )
 
     rake_task = Rake::Task[task_name]

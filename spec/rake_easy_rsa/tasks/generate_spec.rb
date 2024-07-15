@@ -38,13 +38,13 @@ describe RakeEasyRSA::Tasks::Generate do
     end
   end
 
-  def define_tasks(opts = {}, &block)
+  def define_tasks(opts = {}, &)
     ns = opts[:namespace] || :pki
     additional_tasks = opts[:additional_tasks] || default_additional_tasks
 
     namespace ns do
       define_additional_tasks(additional_tasks)
-      define_sut_task(opts, &block)
+      define_sut_task(opts, &)
     end
   end
 

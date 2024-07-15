@@ -10,8 +10,8 @@ require_relative '../../support/shared_examples/encrypt_key_parameters'
 describe RakeEasyRSA::TaskSets::PKI do
   include_context 'rake'
 
-  def define_tasks(opts = {}, &block)
-    subject.define(opts, &block)
+  def define_tasks(opts = {}, &)
+    subject.define(opts, &)
   end
 
   it 'adds all tasks in the provided namespace when supplied' do

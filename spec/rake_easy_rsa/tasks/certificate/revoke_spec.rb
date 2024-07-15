@@ -15,7 +15,7 @@ describe RakeEasyRSA::Tasks::Certificate::Revoke do
     stub_ruby_easy_rsa
   end
 
-  def define_tasks(opts = {}, &block)
+  def define_tasks(opts = {}, &)
     opts = { namespace: :certificate }.merge(opts)
 
     namespace :easy_rsa do
@@ -23,7 +23,7 @@ describe RakeEasyRSA::Tasks::Certificate::Revoke do
     end
 
     namespace opts[:namespace] do
-      subject.define(opts, &block)
+      subject.define(opts, &)
     end
   end
 
@@ -54,7 +54,7 @@ describe RakeEasyRSA::Tasks::Certificate::Revoke do
     reason = 'affiliationChanged'
 
     define_tasks(
-      reason: reason
+      reason:
     )
 
     rake_task = Rake::Task['certificate:revoke']
@@ -74,7 +74,7 @@ describe RakeEasyRSA::Tasks::Certificate::Revoke do
     allow(RubyEasyRSA).to(receive(:revoke))
 
     define_tasks(
-      pki_directory: pki_directory
+      pki_directory:
     )
 
     Rake::Task['certificate:revoke'].invoke(filename_base)
@@ -82,8 +82,8 @@ describe RakeEasyRSA::Tasks::Certificate::Revoke do
     expect(RubyEasyRSA)
       .to(have_received(:revoke)
             .with(hash_including(
-                    filename_base: filename_base,
-                    pki_directory: pki_directory
+                    filename_base:,
+                    pki_directory:
                   )))
   end
 
@@ -95,7 +95,7 @@ describe RakeEasyRSA::Tasks::Certificate::Revoke do
     allow(RubyEasyRSA).to(receive(:revoke))
 
     define_tasks(
-      pki_directory: pki_directory
+      pki_directory:
     )
 
     Rake::Task['certificate:revoke'].invoke(filename_base, reason)
@@ -103,9 +103,9 @@ describe RakeEasyRSA::Tasks::Certificate::Revoke do
     expect(RubyEasyRSA)
       .to(have_received(:revoke)
             .with(hash_including(
-                    filename_base: filename_base,
-                    pki_directory: pki_directory,
-                    reason: reason
+                    filename_base:,
+                    pki_directory:,
+                    reason:
                   )))
   end
 
@@ -117,8 +117,8 @@ describe RakeEasyRSA::Tasks::Certificate::Revoke do
     allow(RubyEasyRSA).to(receive(:revoke))
 
     define_tasks(
-      pki_directory: pki_directory,
-      reason: reason
+      pki_directory:,
+      reason:
     )
 
     Rake::Task['certificate:revoke'].invoke(filename_base)
@@ -126,9 +126,9 @@ describe RakeEasyRSA::Tasks::Certificate::Revoke do
     expect(RubyEasyRSA)
       .to(have_received(:revoke)
             .with(hash_including(
-                    filename_base: filename_base,
-                    pki_directory: pki_directory,
-                    reason: reason
+                    filename_base:,
+                    pki_directory:,
+                    reason:
                   )))
   end
 

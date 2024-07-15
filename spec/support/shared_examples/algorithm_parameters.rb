@@ -14,7 +14,7 @@ shared_examples 'a task with algorithm parameters' do |task_name|
     algorithm = 'ec'
 
     define_tasks(
-      algorithm: algorithm
+      algorithm:
     )
 
     rake_task = Rake::Task[task_name]
@@ -36,7 +36,7 @@ shared_examples 'a task with algorithm parameters' do |task_name|
     curve = 'sect571k1'
 
     define_tasks(
-      curve: curve
+      curve:
     )
 
     rake_task = Rake::Task[task_name]
@@ -58,7 +58,7 @@ shared_examples 'a task with algorithm parameters' do |task_name|
     ec_directory = './ec'
 
     define_tasks(
-      ec_directory: ec_directory
+      ec_directory:
     )
 
     rake_task = Rake::Task[task_name]

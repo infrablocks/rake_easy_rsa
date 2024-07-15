@@ -16,7 +16,7 @@ describe RakeEasyRSA::Tasks::Certificate::Renew do
     stub_ruby_easy_rsa
   end
 
-  def define_tasks(opts = {}, &block)
+  def define_tasks(opts = {}, &)
     opts = { namespace: :certificate }.merge(opts)
 
     namespace :easy_rsa do
@@ -24,7 +24,7 @@ describe RakeEasyRSA::Tasks::Certificate::Renew do
     end
 
     namespace opts[:namespace] do
-      subject.define(opts, &block)
+      subject.define(opts, &)
     end
   end
 
@@ -54,7 +54,7 @@ describe RakeEasyRSA::Tasks::Certificate::Renew do
     allow(RubyEasyRSA).to(receive(:renew))
 
     define_tasks(
-      pki_directory: pki_directory
+      pki_directory:
     )
 
     Rake::Task['certificate:renew'].invoke(filename_base)
@@ -62,8 +62,8 @@ describe RakeEasyRSA::Tasks::Certificate::Renew do
     expect(RubyEasyRSA)
       .to(have_received(:renew)
             .with(hash_including(
-                    filename_base: filename_base,
-                    pki_directory: pki_directory
+                    filename_base:,
+                    pki_directory:
                   )))
   end
 

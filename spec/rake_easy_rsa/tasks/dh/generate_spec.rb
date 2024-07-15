@@ -15,7 +15,7 @@ describe RakeEasyRSA::Tasks::DH::Generate do
     stub_ruby_easy_rsa
   end
 
-  def define_tasks(opts = {}, &block)
+  def define_tasks(opts = {}, &)
     opts = { namespace: :dh }.merge(opts)
 
     namespace :easy_rsa do
@@ -23,7 +23,7 @@ describe RakeEasyRSA::Tasks::DH::Generate do
     end
 
     namespace opts[:namespace] do
-      subject.define(opts, &block)
+      subject.define(opts, &)
     end
   end
 
@@ -51,7 +51,7 @@ describe RakeEasyRSA::Tasks::DH::Generate do
     allow(RubyEasyRSA).to(receive(:gen_dh))
 
     define_tasks(
-      pki_directory: pki_directory
+      pki_directory:
     )
 
     Rake::Task['dh:generate'].invoke
@@ -59,7 +59,7 @@ describe RakeEasyRSA::Tasks::DH::Generate do
     expect(RubyEasyRSA)
       .to(have_received(:gen_dh)
             .with(hash_including(
-                    pki_directory: pki_directory
+                    pki_directory:
                   )))
   end
 

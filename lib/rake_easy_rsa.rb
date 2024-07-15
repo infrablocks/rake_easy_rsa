@@ -17,8 +17,8 @@ module RakeEasyRSA
     )
   end
 
-  def self.define_pki_tasks(opts = {}, &block)
-    RakeEasyRSA::TaskSets::PKI.define(opts, &block)
+  def self.define_pki_tasks(opts = {}, &)
+    RakeEasyRSA::TaskSets::PKI.define(opts, &)
   end
 
   class << self

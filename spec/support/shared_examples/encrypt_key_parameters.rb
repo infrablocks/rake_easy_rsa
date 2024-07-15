@@ -14,7 +14,7 @@ shared_examples 'a task with encrypt key parameters' do |task_name|
     encrypt_key = true
 
     define_tasks(
-      encrypt_key: encrypt_key
+      encrypt_key:
     )
 
     rake_task = Rake::Task[task_name]

@@ -32,7 +32,7 @@ module RakeEasyRSA
           reason = args.reason || t.reason
           RubyEasyRSA.revoke(
             t.parameter_values.merge(
-              reason: reason,
+              reason:,
               filename_base: args.filename_base
             )
           )

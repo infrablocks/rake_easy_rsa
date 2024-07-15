@@ -14,7 +14,7 @@ shared_examples 'a task with gitkeep parameters' do |task_name|
     include_gitkeep_files = false
 
     define_tasks(
-      include_gitkeep_files: include_gitkeep_files
+      include_gitkeep_files:
     )
 
     rake_task = Rake::Task[task_name]
