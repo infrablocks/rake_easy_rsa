@@ -55,13 +55,13 @@ module RakeEasyRSA
              ts.initialise_task_name
            },
            ca_create_task_name: RakeFactory::DynamicValue.new { |ts|
-             "#{ts.ca_namespace}:#{ts.ca_create_task_name}".to_sym
+             :"#{ts.ca_namespace}:#{ts.ca_create_task_name}"
            },
            crl_generate_task_name: RakeFactory::DynamicValue.new { |ts|
-             "#{ts.crl_namespace}:#{ts.crl_generate_task_name}".to_sym
+             :"#{ts.crl_namespace}:#{ts.crl_generate_task_name}"
            },
            dh_generate_task_name: RakeFactory::DynamicValue.new { |ts|
-             "#{ts.dh_namespace}:#{ts.dh_generate_task_name}".to_sym
+             :"#{ts.dh_namespace}:#{ts.dh_generate_task_name}"
            }
       task Tasks::CA::Create,
            name: RakeFactory::DynamicValue.new { |ts|

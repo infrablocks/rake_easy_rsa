@@ -4,7 +4,7 @@ module RakeEasyRSA
   module Mixins
     module AlgorithmParameters
       def self.included(base)
-        super(base)
+        super
         base.class_eval do
           parameter :algorithm
           parameter :curve

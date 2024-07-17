@@ -5,7 +5,7 @@ module RakeEasyRSA
     module GlobalParameters
       # rubocop:disable Metrics/MethodLength
       def self.included(base)
-        super(base)
+        super
         base.class_eval do
           parameter :pki_directory, default: './pki'
           parameter :extensions_directory

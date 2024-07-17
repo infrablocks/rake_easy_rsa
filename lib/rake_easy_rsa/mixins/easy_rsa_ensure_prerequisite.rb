@@ -6,7 +6,7 @@ module RakeEasyRSA
   module Mixins
     module EasyRSAEnsurePrerequisite
       def self.included(base)
-        super(base)
+        super
         base.class_eval do
           parameter :ensure_task_name, default: :'easy_rsa:ensure'
           default_prerequisites(RakeFactory::DynamicValue.new do |t|

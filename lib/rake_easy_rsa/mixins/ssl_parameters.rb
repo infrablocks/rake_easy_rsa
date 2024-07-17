@@ -5,7 +5,7 @@ module RakeEasyRSA
     module SSLParameters
       # rubocop:disable Metrics/MethodLength
       def self.included(base)
-        super(base)
+        super
         base.class_eval do
           parameter :expires_in_days
           parameter :digest

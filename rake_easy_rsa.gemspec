@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rake_dependencies', '~> 3.1'
   spec.add_dependency 'rake_factory', '~> 0.23'
-  spec.add_dependency 'ruby_easy_rsa', '0.12.0.pre.5'
+  spec.add_dependency 'ruby_easy_rsa', '0.12.0.pre.6'
   spec.add_dependency 'semantic', '~> 1.6'
 
   spec.add_development_dependency 'activesupport'
